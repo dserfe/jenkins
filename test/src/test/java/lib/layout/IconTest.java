@@ -99,9 +99,12 @@ public class IconTest  {
         DomElement statusIcons = p.getElementById("statusIcons");
         List<DomElement> statusIconsList = StreamSupport.stream(statusIcons.getChildElements().spliterator(), false).collect(Collectors.toList());
 
-        assertIconToSvgOkay(statusIconsList.get(0).getFirstElementChild().getNextElementSibling(), "icon-user icon-xlg");
+        String iconClass = statusIconsList.get(0).getFirstElementChild().getAttribute("class"); 
+        assertIconToImageOkay(statusIconsList.get(0).getFirstElementChild(), "/images/svgs/user.svg", iconClass);    
+  
+        String pluginIconClass = statusIconsList.get(1).getFirstElementChild().getAttribute("class"); 
+        assertIconToImageOkay(statusIconsList.get(1).getFirstElementChild(), "/plugin/12345/icons/s2.png", pluginIconClass);    
 
-        assertIconToImageOkay(statusIconsList.get(1).getFirstElementChild(), "/plugin/12345/icons/s2.png");
     }
 
     @TestExtension("testBallColorTd")
